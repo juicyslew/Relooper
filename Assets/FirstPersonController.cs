@@ -34,6 +34,6 @@ public class FirstPersonController : MonoBehaviour {
         velocity = transform.rotation * velocity;
         //Get Character Controller and execute Simple Movement Script
         CharacterController cc = GetComponent<CharacterController>();
-        cc.SimpleMove(velocity);
+        cc.Move(velocity*Time.deltaTime);
 	}
 }
