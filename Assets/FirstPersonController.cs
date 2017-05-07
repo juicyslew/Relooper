@@ -14,6 +14,7 @@ public class FirstPersonController : MonoBehaviour
     public Transform BulletSpawn;
     public float RoundInterval = 20.0f;
     public int GhostNum = 5;
+    public float health = 100.0f;
     private int ghostCounter = 0;
     private float RoundTime;
     public Vector3 SpawnLocation = new Vector3(4, 0, 0);
@@ -30,6 +31,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void Start()
     {
+        GetComponent<HealthMonitor>().health = health;
         RoundTime = RoundInterval;
         Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
@@ -88,6 +90,9 @@ public class FirstPersonController : MonoBehaviour
 
             // Create the Bullet from the Bullet Prefab
             var bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+
+            // Set Bullet Owner
+            bullet.GetComponent<BulletScript>().owner = gameObject;
 
             // Add velocity to the Bullet
             bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
