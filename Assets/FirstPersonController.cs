@@ -9,7 +9,7 @@ public class FirstPersonController : MonoBehaviour
     public float gravity = 20.0F;
     public float mousesensitivity = 5.0F;
     public float updownrange = 60.0f;
-    public float bulletSpeed = 50.0f;
+    public float bulletSpeed = 70.0f;
     public GameObject BulletPrefab;
     public Transform BulletSpawn;
     public float RoundInterval = 20.0f;
@@ -25,6 +25,7 @@ public class FirstPersonController : MonoBehaviour
     //CharacterController controller;
     public List<Vector3> Positions = new List<Vector3>();
     public List<Quaternion> Rotations = new List<Quaternion>();
+    public List<bool> Shots = new List<bool>();
     public int cd = 0;
 
     private void Start()
@@ -38,7 +39,8 @@ public class FirstPersonController : MonoBehaviour
     {
         CharacterController controller = GetComponent<CharacterController>();
         Positions.Add(transform.position);
-        Rotations.Add(transform.rotation);
+        Rotations.Add(Camera.main.transform.rotation);
+        Shots.Add(false);
         //Positions.Add(transform.position.y);
         //Positions.Add(transform.position.z);
         float leftrightrot = Input.GetAxis("Mouse X") * mousesensitivity;
@@ -80,13 +82,18 @@ public class FirstPersonController : MonoBehaviour
 
     void Fire()
     {
-        // Create the Bullet from the Bullet Prefab
-        var bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+        if (Shots.Count > 0)
+        {
+            Shots[Shots.Count - 1] = true;
 
-        // Add velocity to the Bullet
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward*bulletSpeed;
+            // Create the Bullet from the Bullet Prefab
+            var bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
 
-        // Destroy the Bullet after 2 seconds
-        Destroy(bullet, 1.5f);
+            // Add velocity to the Bullet
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
+
+            // Destroy the Bullet after 2 seconds
+            Destroy(bullet, 1.5f);
+        }
     }
 }
