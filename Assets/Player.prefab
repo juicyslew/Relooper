@@ -133,6 +133,8 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
+  m_AllowMSAA: 1
+  m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -171,6 +173,12 @@ MonoBehaviour:
   BulletPrefab: {fileID: 1281216561865238, guid: 3910d7d47e90edc40ab67efb77c62dc9,
     type: 2}
   BulletSpawn: {fileID: 4433807738302156}
+  RoundInterval: 3
+  GhostNum: 5
+  SpawnLocation: {x: 4, y: 0, z: 0}
+  Ghost: {fileID: 0}
+  Positions: []
+  Rotations: []
 --- !u!124 &124575850895153958
 Behaviour:
   m_ObjectHideFlags: 1
