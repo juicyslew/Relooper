@@ -14,13 +14,11 @@ public class GhostController : MonoBehaviour
     public GameObject BulletPrefab;
     public Transform BulletSpawn;
     public float bulletSpeed = 70.0f;
-    public float health = 100.0f;
     Transform partrans;
     // Use this for initialization
     void Start()
     {
         partrans = gameObject.transform.parent.transform;
-        GetComponent<HealthMonitor>().health = health;
         GameObject player = GameObject.Find("Player");
         Positions = player.GetComponent<FirstPersonController>().Positions;
         Rotations = player.GetComponent<FirstPersonController>().Rotations;

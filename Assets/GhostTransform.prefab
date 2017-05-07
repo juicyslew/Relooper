@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292bb9688a96a194c94bd9cc840cf037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 100
 --- !u!114 &114723193867447484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,5 +179,4 @@ MonoBehaviour:
   BulletPrefab: {fileID: 1281216561865238, guid: 3910d7d47e90edc40ab67efb77c62dc9,
     type: 2}
   BulletSpawn: {fileID: 4580464164908744}
-  bulletSpeed: 50
-  health: 100
+  bulletSpeed: 150

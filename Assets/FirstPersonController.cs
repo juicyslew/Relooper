@@ -14,7 +14,7 @@ public class FirstPersonController : MonoBehaviour
     public Transform BulletSpawn;
     public float RoundInterval = 20.0f;
     public int GhostNum = 5;
-    public float health = 100.0f;
+    public float fireinterval = 20.0f;
     private int ghostCounter = 0;
     private float RoundTime;
     public Vector3 SpawnLocation = new Vector3(4, 0, 0);
@@ -31,7 +31,6 @@ public class FirstPersonController : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<HealthMonitor>().health = health;
         RoundTime = RoundInterval;
         Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
@@ -78,7 +77,7 @@ public class FirstPersonController : MonoBehaviour
         if (Input.GetMouseButton(0) && cd <= 0)
         {
             Fire();
-            cd = 20;
+            cd = (int)fireinterval;
         }
     }
 
@@ -98,7 +97,7 @@ public class FirstPersonController : MonoBehaviour
             bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
 
             // Destroy the Bullet after 2 seconds
-            Destroy(bullet, 1.5f);
+            Destroy(bullet, 1f);
         }
     }
 }
