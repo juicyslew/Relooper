@@ -25,6 +25,7 @@ public class FirstPersonController : MonoBehaviour
     //CharacterController controller;
     public List<Vector3> Positions = new List<Vector3>();
     public List<Quaternion> Rotations = new List<Quaternion>();
+    public int cd = 0;
 
     private void Start()
     {
@@ -69,9 +70,11 @@ public class FirstPersonController : MonoBehaviour
                 noGhost = true;
             }
         }
-        if (Input.GetMouseButtonDown(0))
+        cd -= 1;
+        if (Input.GetMouseButton(0) && cd <= 0)
         {
             Fire();
+            cd = 20;
         }
     }
 
