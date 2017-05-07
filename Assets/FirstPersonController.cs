@@ -16,6 +16,12 @@ public class FirstPersonController : MonoBehaviour
     public int GhostNum = 5;
     public float fireinterval = 20.0f;
     private int ghostCounter = 0;
+    public float maxspray = 6.0f;
+    public float minspray = 0.0f;
+    public float sprayinterval = 1.0f;
+    public float spraydecrease = .1f;
+    private float Spray = 0.0f;
+    private float negligableRot = .001f;
     private float RoundTime;
     public Vector3 SpawnLocation = new Vector3(4, 0, 0);
     public Transform Ghost;
@@ -27,6 +33,7 @@ public class FirstPersonController : MonoBehaviour
     public List<Vector3> Positions = new List<Vector3>();
     public List<Quaternion> Rotations = new List<Quaternion>();
     public List<bool> Shots = new List<bool>();
+    public List<Quaternion> ShotDir = new List<Quaternion>();
     public int cd = 0;
 
     private void Start()
@@ -79,6 +86,11 @@ public class FirstPersonController : MonoBehaviour
             Fire();
             cd = (int)fireinterval;
         }
+        Spray -= spraydecrease;//(Spray-minspray)*spraydecrease + minspray;
+        if (Spray < minspray+negligableRot){
+            Spray = minspray;
+        }
+        Debug.Log(Spray);
     }
 
     void Fire()
@@ -93,11 +105,22 @@ public class FirstPersonController : MonoBehaviour
             // Set Bullet Owner
             bullet.GetComponent<BulletScript>().owner = gameObject;
 
+            var randomNumberX = Random.Range(-Spray, Spray);
+            var randomNumberY = Random.Range(-Spray, Spray);
+            var randomNumberZ = Random.Range(-Spray, Spray);
+
+            bullet.transform.Rotate(randomNumberX, randomNumberY, randomNumberZ);
+
             // Add velocity to the Bullet
+            ShotDir.Add(bullet.transform.rotation);
             bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
 
             // Destroy the Bullet after 2 seconds
             Destroy(bullet, 1f);
+            Spray += sprayinterval;
+            if (Spray > maxspray){
+                Spray = maxspray;
+            }
         }
     }
 }
