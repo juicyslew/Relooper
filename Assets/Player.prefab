@@ -176,7 +176,7 @@ MonoBehaviour:
   RoundInterval: 3
   GhostNum: 5
   SpawnLocation: {x: 4, y: 0, z: 0}
-  Ghost: {fileID: 0}
+  Ghost: {fileID: 4336249415020152, guid: 779b764767e7c0b46900628c39573978, type: 2}
   Positions: []
   Rotations: []
 --- !u!124 &124575850895153958
