@@ -325,32 +325,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114227655189844886, guid: 4b219c59dd9898f49aa397a123a2c50d,
-        type: 2}
-      propertyPath: Ghost
-      value: 
-      objectReference: {fileID: 4876793301173686, guid: af31ab2c9d7e1ed49b75befcfc0d29e2,
-        type: 2}
-    - target: {fileID: 114227655189844886, guid: 4b219c59dd9898f49aa397a123a2c50d,
-        type: 2}
-      propertyPath: SpawnLocation.x
-      value: -7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114227655189844886, guid: 4b219c59dd9898f49aa397a123a2c50d,
-        type: 2}
-      propertyPath: fireinterval
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114227655189844886, guid: 4b219c59dd9898f49aa397a123a2c50d,
-        type: 2}
-      propertyPath: bulletSpeed
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 114227655189844886, guid: 4b219c59dd9898f49aa397a123a2c50d,
-        type: 2}
-      propertyPath: spraydecrease
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b219c59dd9898f49aa397a123a2c50d, type: 2}
   m_IsPrefabParent: 0

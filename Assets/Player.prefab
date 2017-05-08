@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 143683685053654478}
   - component: {fileID: 114227655189844886}
   - component: {fileID: 65443400038535714}
-  - component: {fileID: 114377749785143876}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Character
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1134348531905820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4848716294786286}
@@ -178,36 +177,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ade18903c585cb4a99ea289c6132fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxhealth: 100
+  health: 100
   speed: 6
   jumpSpeed: 8
   gravity: 20
   mousesensitivity: 5
   updownrange: 60
-  bulletSpeed: 50
+  bulletSpeed: 150
   BulletPrefab: {fileID: 1281216561865238, guid: 3910d7d47e90edc40ab67efb77c62dc9,
     type: 2}
   BulletSpawn: {fileID: 4433807738302156}
-  RoundInterval: 8
+  RoundInterval: 10
   GhostNum: 5
-  health: 100
-  SpawnLocation: {x: 4, y: 0, z: 0}
-  Ghost: {fileID: 4146797155805420, guid: 779b764767e7c0b46900628c39573978, type: 2}
+  fireinterval: 5
+  maxspray: 7.5
+  minspray: 0
+  sprayinterval: 1
+  spraydecrease: 0.1
+  SpawnLocation: {x: -7.5, y: 0, z: 0}
+  Ghost: {fileID: 1383599084348600, guid: af31ab2c9d7e1ed49b75befcfc0d29e2, type: 2}
+  DeadPlayerPrefab: {fileID: 1347124895463596, guid: ad443f4ca36169a47ac2cd4068a13faf,
+    type: 2}
   Positions: []
   Rotations: []
   Shots: 
+  ShotDir: []
   cd: 0
---- !u!114 &114377749785143876
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1134348531905820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292bb9688a96a194c94bd9cc840cf037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
 --- !u!124 &124575850895153958
 Behaviour:
   m_ObjectHideFlags: 1

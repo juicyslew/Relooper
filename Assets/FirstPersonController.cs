@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public float maxhealth = 100.0f;
+    public float health = 100.0f;
     public float speed = 6.0F;
     public float jumpSpeed = 8.0F;
     public float gravity = 20.0F;
@@ -24,10 +26,15 @@ public class FirstPersonController : MonoBehaviour
     private float negligableRot = .001f;
     private float RoundTime;
     public Vector3 SpawnLocation = new Vector3(4, 0, 0);
-    public Transform Ghost;
+    public GameObject Ghost;
+    private List<GameObject> ghosts = new List<GameObject>();
     float vertrot = 0.0F;
     private Vector3 moveDirection = Vector3.zero;
     private bool noGhost = false;
+    private bool die = false;
+    public GameObject DeadPlayerPrefab;
+    private GameObject deadplay;
+    private Renderer rend;
 
     //CharacterController controller;
     public List<Vector3> Positions = new List<Vector3>();
@@ -38,6 +45,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void Start()
     {
+        rend = GetComponent<Renderer>();
+        health = maxhealth;
         RoundTime = RoundInterval;
         Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
@@ -70,15 +79,7 @@ public class FirstPersonController : MonoBehaviour
         controller.Move(moveDirection * Time.deltaTime);
         if (Time.time > RoundTime && noGhost == false)
         {
-            ghostCounter += 1;
-            Instantiate(Ghost, Vector3.zero, Quaternion.identity);
-            transform.position = SpawnLocation;
-            transform.rotation = Quaternion.identity;
-            RoundTime += RoundInterval;
-            if (ghostCounter > GhostNum)
-            {
-                noGhost = true;
-            }
+            Restart();
         }
         cd -= 1;
         if (Input.GetMouseButton(0) && cd <= 0)
@@ -90,7 +91,40 @@ public class FirstPersonController : MonoBehaviour
         if (Spray < minspray+negligableRot){
             Spray = minspray;
         }
-        Debug.Log(Spray);
+        if (health < 0 && die == false)
+        {
+            Die();
+        }
+        //Debug.Log(Spray);
+    }
+
+    void Restart()
+    {
+        die = false;
+        RoundTime += RoundInterval;
+        health = maxhealth;
+        ghostCounter += 1;
+        foreach (GameObject g in ghosts)
+        {
+            g.GetComponentInChildren<GhostController>().Restart();
+        }
+        GameObject newghost = Instantiate(Ghost, Vector3.zero, Quaternion.identity);
+        ghosts.Add(newghost);
+        transform.position = SpawnLocation;
+        transform.rotation = Quaternion.identity;
+        if (ghostCounter > GhostNum)
+        {
+            noGhost = true;
+        }
+        if (deadplay)
+        {
+            Destroy(deadplay);
+        }
+    }
+    void Die()
+    {
+        GameObject deadplay = Instantiate(DeadPlayerPrefab, transform.position, transform.rotation);
+        die = true;
     }
 
     void Fire()

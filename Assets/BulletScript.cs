@@ -22,9 +22,13 @@ public class BulletScript : MonoBehaviour {
         GameObject collideEntity = collision.gameObject;
         if (collideEntity != owner)//check that bullet isnt colliding with owner
         {
-            if (collideEntity.tag == "Character")
+            if (collideEntity.tag == "Ghost")
             {
-                collideEntity.GetComponent<HealthMonitor>().health -= bulletDamage;
+                collideEntity.GetComponent<GhostController>().health -= bulletDamage;
+            }
+            if (collideEntity.tag == "Player")
+            {
+                collideEntity.GetComponent<FirstPersonController>().health -= bulletDamage;
             }
             Destroy(gameObject);
         }

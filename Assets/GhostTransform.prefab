@@ -53,10 +53,9 @@ GameObject:
   - component: {fileID: 33118876607249646}
   - component: {fileID: 65719621829480250}
   - component: {fileID: 23000407323987264}
-  - component: {fileID: 114096525500801690}
   m_Layer: 0
   m_Name: Ghost
-  m_TagString: Character
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +114,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d436b17248a09cd40980f447eb3c4566, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,18 +152,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114096525500801690
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1918465767479764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292bb9688a96a194c94bd9cc840cf037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
 --- !u!114 &114723193867447484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,7 +163,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3deaa380ed714bd4fa7bf0fccd049ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxhealth: 100
+  health: 100
   BulletPrefab: {fileID: 1281216561865238, guid: 3910d7d47e90edc40ab67efb77c62dc9,
     type: 2}
   BulletSpawn: {fileID: 4580464164908744}
   bulletSpeed: 150
+  materials:
+  - {fileID: 2100000, guid: d436b17248a09cd40980f447eb3c4566, type: 2}
+  - {fileID: 2100000, guid: e53a38dcf57df734caf550bda4c124e4, type: 2}
+  DeadPlayerPrefab: {fileID: 1347124895463596, guid: ad443f4ca36169a47ac2cd4068a13faf,
+    type: 2}
