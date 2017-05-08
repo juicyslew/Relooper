@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class FirstPersonController : MonoBehaviour
+public class SecondPersonController : MonoBehaviour
 {
     public float maxhealth = 100.0f;
     public float health = 100.0f;
@@ -27,7 +27,7 @@ public class FirstPersonController : MonoBehaviour
     private float negligableRot = .001f;
     private float RoundTime;
     public Vector3 SpawnLocation = new Vector3(4, 0, 0);
-    public GameObject Ghost;
+    public GameObject Ghost2;
     private List<GameObject> ghosts = new List<GameObject>();
     float vertrot = 0.0F;
     private Vector3 moveDirection = Vector3.zero;
@@ -36,6 +36,7 @@ public class FirstPersonController : MonoBehaviour
     public GameObject DeadPlayerPrefab;
     private GameObject deadplay;
     private Renderer rend;
+    Camera Camera2;
 
     //CharacterController controller;
     public List<Vector3> Positions = new List<Vector3>();
@@ -55,9 +56,10 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
+        Camera Camera2 = GameObject.Find("Camera2").GetComponent<Camera>();
         CharacterController controller = GetComponent<CharacterController>();
         Positions.Add(transform.position);
-        Rotations.Add(Camera.main.transform.rotation);
+        Rotations.Add(Camera2.transform.rotation);
         Shots.Add(false);
         //Positions.Add(transform.position.y);
         //Positions.Add(transform.position.z);
@@ -67,10 +69,10 @@ public class FirstPersonController : MonoBehaviour
         //rotate Up and down the camera based on mouse position
         vertrot -= Input.GetAxis("Mouse Y") * mousesensitivity; //minus because updown rot is backwards
         vertrot = Mathf.Clamp(vertrot, -updownrange, updownrange);
-        Camera.main.transform.rotation = Quaternion.Euler(vertrot, transform.rotation.eulerAngles.y, 0);
+        Camera2.transform.rotation = Quaternion.Euler(vertrot, transform.rotation.eulerAngles.y, 0);
         if (controller.isGrounded)
         {
-            moveDirection = new Vector3(Input.GetAxis("Hori_2"), 0, Input.GetAxis("Vert_2"));
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
             if (Input.GetButton("Jump"))
@@ -89,7 +91,8 @@ public class FirstPersonController : MonoBehaviour
             cd = (int)fireinterval;
         }
         Spray -= spraydecrease;//(Spray-minspray)*spraydecrease + minspray;
-        if (Spray < minspray+negligableRot){
+        if (Spray < minspray + negligableRot)
+        {
             Spray = minspray;
         }
         if (health < 0 && die == false)
@@ -109,7 +112,7 @@ public class FirstPersonController : MonoBehaviour
         {
             g.GetComponentInChildren<GhostController>().Restart();
         }
-        GameObject newghost = Instantiate(Ghost, Vector3.zero, Quaternion.identity);
+        GameObject newghost = Instantiate(Ghost2, Vector3.zero, Quaternion.identity);
         ghosts.Add(newghost);
         transform.position = SpawnLocation;
         transform.rotation = Quaternion.identity;
@@ -153,7 +156,8 @@ public class FirstPersonController : MonoBehaviour
             // Destroy the Bullet after 2 seconds
             Destroy(bullet, 1f);
             Spray += sprayinterval;
-            if (Spray > maxspray){
+            if (Spray > maxspray)
+            {
                 Spray = maxspray;
             }
         }
