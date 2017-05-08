@@ -95,6 +95,10 @@ public class GhostController : MonoBehaviour
 
         // Set Bullet Owner
         bullet.GetComponent<BulletScript>().owner = gameObject;
+        if (die)
+        {
+            bullet.GetComponent<BulletScript>().ghosted = true;
+        }
 
         bullet.transform.rotation = ShotDir[k];
 

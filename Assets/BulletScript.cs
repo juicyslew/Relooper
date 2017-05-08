@@ -5,10 +5,17 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour {
     public GameObject owner;
     public float bulletDamage;
+    public bool ghosted = false;
+    public Material material;
+    Renderer rend;
     // Use this for initialization
     void Start()
     {
-
+        rend = GetComponent<MeshRenderer>();
+        if (ghosted)
+        {
+            rend.sharedMaterial = material;
+        }
     }
 
     // Update is called once per frame
@@ -20,7 +27,7 @@ public class BulletScript : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         GameObject collideEntity = collision.gameObject;
-        if (collideEntity != owner)//check that bullet isnt colliding with owner
+        if (collideEntity != owner && !ghosted)//check that bullet isnt colliding with owner
         {
             if (collideEntity.tag == "Ghost")
             {
